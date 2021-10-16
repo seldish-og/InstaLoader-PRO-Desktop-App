@@ -27,6 +27,10 @@ class InstagramParser:
             executable_path='chromedriver',
             options=chrome_options)
 
+        self.HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
+                                      ' Chrome/87.0.4280.141 Safari/537.36',
+                        'accept': '*/*'}
+
     def close_browser(self):
         self.browser.close()
         self.browser.quit()  # (just in case)
