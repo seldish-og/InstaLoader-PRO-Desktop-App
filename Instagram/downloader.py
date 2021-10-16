@@ -1,5 +1,7 @@
 import random
 import time
+import lxml
+import cchardet
 import os
 import requests
 import requests.exceptions
@@ -7,37 +9,41 @@ from bs4 import BeautifulSoup
 
 
 class Initializer:
-    def __init__(self, video_name, video_path, mode, chat_url, quantity):
-        self.video_name = video_name
-        self.video_path = video_path
-        self.mode = mode
-        self.chat_url = chat_url
-        self.quantity = quantity
+    def __init__(self, video_name, video_path, mode, url):
+        self.VIDEO_NAME = video_name
+        self.PATH = video_path
+        self.MODE = mode
+        self.URL = url
         self.HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)'
                                       ' Chrome/87.0.4280.141 Safari/537.36',
                         'accept': '*/*'}
 
 
-class Downloader(Initializer):
+class TextParser(Initializer):
     def get_page_text(self, url):
         try:
-            response = requests.get(url, headers=self.HEADERS)
+            requests_session = requests.Session()
+            response = requests_session.get(url, headers=self.HEADERS)
             return response.text
 
         except requests.exceptions.MissingSchema:
-            return "Invalid Url"
+            return "Invalid Url" 
 
-    def find_link(self):
+    def get_link(self):
         html = self.get_page_text(self.chat_url)
-        soup = BeautifulSoup(html, 'html.parser')
-        link = soup.find("meta", property="og:video")
+        soup = BeautifulSoup(html, 'lxml')
+        if self.MODE == "video":
+            property = "og:video"
+        if self.MODE == "picture":
+            property = f"og:image"
+        link = soup.find("meta", property=property)
         return link['content']
 
-    def download_video(self):
-        video = requests.get(self.find_link(), stream=True)
-        complete_name = os.path.join(self.video_path, self.video_name)
 
-        # add checking download mode
+class Downloader(Initializer):
+    def download_video(self, link):
+        video = requests.get(link, stream=True)
+        complete_name = os.path.join(self.PATH, self.VIDEO_NAME)
 
         with open(complete_name, "wb") as video_file:
             for chunk in video.iter_content(chunk_size=1024 * 1024):
