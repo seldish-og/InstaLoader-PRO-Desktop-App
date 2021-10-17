@@ -1,14 +1,15 @@
-from Instagram.downloader import TextParser
-from downloader import Downloader, TextParser, Initializer
+from downloader import TextParser
+from downloader import Downloader, TextParser
 
-text_parser = TextParser()
-downloader = Downloader()
-initializer = Initializer()
 
-def main():
+def main(video_name, video_path, mode, url):
+    text_parser = TextParser(url, mode)
+    downloader = Downloader(video_name, video_path)
+
     link = text_parser.get_link()
-    if initializer.MODE == "video":
-        downloader.download_video(link)
+    downloader.download(link)
 
 if __name__ == '__main__':
-    main()
+    main('ff.jpg', r"C:\Users\jegor\Downloads", "picture", 
+    "https://www.instagram.com/p/CVFXWNNFrBe/")
+
