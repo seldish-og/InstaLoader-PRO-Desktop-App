@@ -10,6 +10,6 @@ def main(video_name, video_path, mode, url):
     downloader.download(link)
 
 if __name__ == '__main__':
-    main('ff.jpg', r"C:\Users\jegor\Downloads", "picture", 
-    "https://www.instagram.com/p/CVFXWNNFrBe/")
+    main(name, path, mode, 
+    link)
 
