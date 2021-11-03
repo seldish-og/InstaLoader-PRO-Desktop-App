@@ -56,5 +56,3 @@ class Downloader:
                     video_file.write(chunk)
 
         print("successfully saved!")
-
-# need to add try except
