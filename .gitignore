@@ -2,8 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-.iml
-.xml
+
+.idea
 # C extensions
 *.so
 
