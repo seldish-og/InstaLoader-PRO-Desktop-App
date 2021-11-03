@@ -11,6 +11,6 @@ def main(video_name, video_path, mode, url, width, height):
 
 if __name__ == '__main__':
     main("testvideo.mp4", r"C:\Users\jegor\Downloads",
-     "photo", "https://www.instagram.com/p/CVumcXblduy/",
+     "video", "https://www.instagram.com/p/CVumcXblduy/",
       "1920", "1080")
 
