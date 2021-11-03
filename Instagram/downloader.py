@@ -37,9 +37,11 @@ class TextParser:
 
 
 class Downloader:
-    def __init__(self, video_name, video_path):
+    def __init__(self, video_name, video_path, width, height):
         self.VIDEO_NAME = video_name
         self.PATH = video_path
+        self.WIDTH = width
+        self.HEIGHT = height
 
     def download(self, link):
         try:
@@ -51,7 +53,7 @@ class Downloader:
 
         with open(complete_name, "wb") as video_file:
 
-            for chunk in video.iter_content(chunk_size=1024 * 1024):
+            for chunk in video.iter_content(chunk_size=self.WIDTH * self.HEIGHT):
                 if chunk:
                     video_file.write(chunk)
 
