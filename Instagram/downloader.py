@@ -1,5 +1,6 @@
 import lxml
 import cchardet
+import re
 import os
 import requests
 import requests.exceptions
@@ -8,8 +9,8 @@ from bs4 import BeautifulSoup
 
 class TextParser:
     def __init__(self, url, mode):
-        self.url = url
-        self.mode = mode
+        self.URL = url
+        self.MODE = mode
 
     def get_page_text(self, url):
         try:
@@ -23,25 +24,28 @@ class TextParser:
             return "Invalid Url" 
 
     def get_link(self):
-        html = self.get_page_text(self.url)
-        soup = BeautifulSoup(html, 'lxml')
+        response = self.get_page_text(self.URL)
+        matches = re.findall(r"video_url\W\W\W([-\W\w]+)\W\W\Wvideo_view_count", response)
+        refactored_matches = matches[0].replace("\\u0026", "&")
 
-        if self.mode == "video":
-            property = "og:video"
+        if self.MODE == "video":
+            print(2)
+            links = refactored_matches.split('''"''')
+            main_link = links[0]
+ 
+        if self.MODE == "picture":
+            pass
 
-        if self.mode == "picture":
-            property = f"og:image"
-
-        link = soup.find("meta", property=property)
-        return link['content']
+        print(main_link)
+        return main_link
 
 
 class Downloader:
     def __init__(self, video_name, video_path, width, height):
         self.VIDEO_NAME = video_name
         self.PATH = video_path
-        self.WIDTH = width
-        self.HEIGHT = height
+        self.WIDTH = int(width)
+        self.HEIGHT = int(height)
 
     def download(self, link):
         try:
