@@ -25,17 +25,15 @@ class TextParser:
 
     def get_link(self):
         response = self.get_page_text(self.URL)
-        matches = re.findall(r"video_url\W\W\W([-\W\w]+)\W\W\Wvideo_view_count", response)
-        refactored_matches = matches[0].replace("\\u0026", "&")
+        
 
         if self.MODE == "video":
-            print(2)
-            links = refactored_matches.split('''"''')
-            main_link = links[0]
+            matches = re.findall('"video_url":"([^"]+)"', response)
  
         if self.MODE == "picture":
-            pass
+            matches = re.findall('"display_url":"([^"]+)"', response)
 
+        main_link = matches[0].replace("\\u0026", "&")
         print(main_link)
         return main_link
 
