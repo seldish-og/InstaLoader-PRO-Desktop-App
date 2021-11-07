@@ -1,5 +1,5 @@
-from downloader import TextParser
-from downloader import Downloader, TextParser
+from .downloader import TextParser
+from .downloader import Downloader, TextParser
 
 
 def main(video_name, video_path, mode, link, width, height):
@@ -12,8 +12,8 @@ def main(video_name, video_path, mode, link, width, height):
     if mode == "image":
         downloader.download_image(url)
 
-if __name__ == '__main__':
-    main("testphoto21.png", r"C:\Users\jegor\Downloads",
-     "image", "https://www.instagram.com/p/CVykxdThgHP/",
-      "400", "500")
+# if __name__ == '__main__':
+#     main("testphoto21.png", r"C:\Users\jegor\Downloads",
+#      "image", "https://www.instagram.com/p/CVykxdThgHP/",
+#       "400", "500")
 

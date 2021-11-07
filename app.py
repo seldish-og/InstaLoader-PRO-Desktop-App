@@ -1,8 +1,8 @@
 import sys
 
-from Instagram
+from instagram import main
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from design.design_app import Ui_MainWindow
+from views.design.design_app import Ui_MainWindow
 
 
 class MyApp(QMainWindow, Ui_MainWindow):
@@ -18,12 +18,16 @@ class MyApp(QMainWindow, Ui_MainWindow):
         name = self.name_input.text()
         path = self.path_input.text()
 
-        mode = self.mod
+        if self.radio_photo.isChecked():
+            mode = "image"
+        if self.radio_video.isChecked():
+            mode = "video" 
 
         link = self.link_input.text()
         width = self.width_input.text()
         height = self.height_input.text()
-        
+
+        main.main(name, path, mode, link, width, height)
 
 
 def except_hook(cls, exception, traceback):
