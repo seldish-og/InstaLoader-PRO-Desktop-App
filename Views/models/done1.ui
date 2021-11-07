@@ -160,7 +160,7 @@ font-size: 15pt;</string>
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>Views/Images/logo.png</pixmap>
+     <pixmap>../Images/logo.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1014,7 +1014,7 @@ background-color: rgb(189, 53, 116);</string>
 font: 13pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
-     <string>1920</string>
+     <string>400</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="height_input">
@@ -1031,7 +1031,7 @@ font: 13pt &quot;Times New Roman&quot;;</string>
 font: 13pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
-     <string>1080</string>
+     <string>500</string>
     </property>
    </widget>
    <widget class="QLabel" name="height_label">
