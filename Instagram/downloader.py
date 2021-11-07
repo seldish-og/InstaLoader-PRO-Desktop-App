@@ -25,7 +25,7 @@ class TextParser:
         except requests.exceptions.MissingSchema:
             return "Invalid Url"
 
-    def get_link(self):
+    def get_url(self):
         response = self.get_page_text(self.URL)
 
         if self.MODE == "video":
@@ -34,9 +34,9 @@ class TextParser:
         if self.MODE == "image":
             matches = re.findall('"display_url":"([^"]+)"', response)
 
-        main_link = matches[0].replace("\\u0026", "&")
-        print(main_link)
-        return main_link
+        main_url = matches[0].replace("\\u0026", "&")
+        print(main_url)
+        return main_url
 
 
 class Downloader:

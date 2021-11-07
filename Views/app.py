@@ -15,12 +15,15 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.pushButton.clicked.connect(self.run)
 
     def run(self):
-        width = self.width_input.text()
-        height = self.height_input.text()
         name = self.name_input.text()
         path = self.path_input.text()
+
+        mode = self.mod
+
         link = self.link_input.text()
-        self.label.setText("OK")
+        width = self.width_input.text()
+        height = self.height_input.text()
+        
 
 
 def except_hook(cls, exception, traceback):
