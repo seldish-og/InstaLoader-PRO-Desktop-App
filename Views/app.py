@@ -1,5 +1,6 @@
 import sys
 
+from Instagram
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from design.design_app import Ui_MainWindow
 
@@ -9,9 +10,16 @@ class MyApp(QMainWindow, Ui_MainWindow):
         super().__init__()
         
         self.setupUi(self)
+
+
         self.pushButton.clicked.connect(self.run)
 
     def run(self):
+        width = self.width_input.text()
+        height = self.height_input.text()
+        name = self.name_input.text()
+        path = self.path_input.text()
+        link = self.link_input.text()
         self.label.setText("OK")
 
 
