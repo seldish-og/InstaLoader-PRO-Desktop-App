@@ -5,6 +5,8 @@ import os
 import requests
 import requests.exceptions
 from bs4 import BeautifulSoup
+from io import BytesIO
+from PIL import Image
 
 
 class TextParser:
@@ -21,16 +23,15 @@ class TextParser:
             return response.text
 
         except requests.exceptions.MissingSchema:
-            return "Invalid Url" 
+            return "Invalid Url"
 
     def get_link(self):
         response = self.get_page_text(self.URL)
-        
 
         if self.MODE == "video":
             matches = re.findall('"video_url":"([^"]+)"', response)
- 
-        if self.MODE == "picture":
+
+        if self.MODE == "image":
             matches = re.findall('"display_url":"([^"]+)"', response)
 
         main_link = matches[0].replace("\\u0026", "&")
@@ -40,21 +41,29 @@ class TextParser:
 
 class Downloader:
     def __init__(self, video_name, video_path, width, height):
-        self.VIDEO_NAME = video_name
-        self.PATH = video_path
         self.WIDTH = int(width)
         self.HEIGHT = int(height)
+        self.COMPLETE_PATH = os.path.join(video_path, video_name)
 
-    def download(self, link):
+    def download_image(self, link):
+        try:
+            response = requests.get(link)
+        except requests.exceptions.MissingSchema:
+            return "Invalid Url"
+
+        image = Image.open(BytesIO(response.content))
+        resized_image = image.resize((self.WIDTH, self.HEIGHT), Image.ANTIALIAS)
+        resized_image.save(self.COMPLETE_PATH)
+        
+        print("successfully saved!")
+
+    def download_video(self, link):
         try:
             video = requests.get(link, stream=True)
         except requests.exceptions.MissingSchema:
-            return "Invalid Url" 
+            return "Invalid Url"
 
-        complete_name = os.path.join(self.PATH, self.VIDEO_NAME)
-
-        with open(complete_name, "wb") as video_file:
-
+        with open(self.COMPLETE_PATH, "wb") as video_file:
             for chunk in video.iter_content(chunk_size=self.WIDTH * self.HEIGHT):
                 if chunk:
                     video_file.write(chunk)

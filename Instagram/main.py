@@ -7,10 +7,13 @@ def main(video_name, video_path, mode, url, width, height):
     downloader = Downloader(video_name, video_path, width, height)
 
     link = text_parser.get_link()
-    downloader.download(link)
+    if mode == "video":
+        downloader.download_video(link)
+    if mode == "image":
+        downloader.download_image(link)
 
 if __name__ == '__main__':
-    main("testphoto.png", r"C:\Users\jegor\Downloads",
-     "picture", "https://www.instagram.com/p/CVykxdThgHP/",
+    main("testphoto21.png", r"C:\Users\jegor\Downloads",
+     "image", "https://www.instagram.com/p/CVykxdThgHP/",
       "400", "500")
 

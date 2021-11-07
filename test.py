@@ -6,11 +6,21 @@ from selenium import webdriver
 import re
 from skimage import io
 import cv2
+from PIL import Image
+from io import BytesIO
+
+url = 'https://scontent-arn2-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/252491310_406986530867116_404895148171725041_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com&_nc_cat=104&_nc_ohc=19PscMIOfV4AX9CEqHh&edm=AABBvjUBAAAA&ccb=7-4&oh=7fb20cd9a2a30362aacd4f51a32435c2&oe=618E0064&_nc_sid=83d603.jpg'
+r = requests.get(url)
+image = Image.open(BytesIO(r.content))
+new_image = image.resize((400, 500), Image.ANTIALIAS)
+new_image.save('image_400.jpg')
 
 
-width,height = '500', '600'
-req = io.imread("https://www.instagram.com/p/CVykxdThgHP/")
-cv2.imwrite(r"C:\Users\jegor\Downloads\image.jpg", cv2.resize(req, (width,height)))
+'''doesn't work'''
+# width,height = '500', '600'
+# req = io.imread("https://www.instagram.com/p/CVykxdThgHP/")
+# cv2.imwrite(r"C:\Users\jegor\Downloads\imagexr.jpg", cv2.resize(req, (400,500)))
+'''doesn't work'''
 
 '''work well both with pics and vids'''
 # response = requests.get("https://www.instagram.com/p/CV2FxakF7Rl/").text
