@@ -14,7 +14,7 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
         self.pushButton.clicked.connect(self.run)
 
-    def run(self):
+    def download(self):
         name = self.name_input.text()
         path = self.path_input.text()
 
@@ -27,7 +27,10 @@ class MyApp(QMainWindow, Ui_MainWindow):
         width = self.width_input.text()
         height = self.height_input.text()
 
-        main.main(name, path, mode, link, width, height)
+        try:
+            main.main(name, path, mode, link, width, height)
+        except Exception as e:
+            print(e)
 
 
 def except_hook(cls, exception, traceback):
