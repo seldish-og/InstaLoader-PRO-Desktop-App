@@ -1,26 +1,33 @@
-import psycopg2
-import config
+import sqlite3
 
 
-def connect_database():
-    connection = psycopg2.connect(
-        host=config.host, 
-        user=config.user,
-        password=config.password,
-        database=config.db_name
-        )
+class DataBase:
+    def __init__(self):
+        self.connection = sqlite3.connect("database/history.sqlite")
+        self.cursor = self.connection.cursor()
 
-    cursor = connection.cursor()
-    return cursor
+    def add_to_db(self, command):
+        self.cursor.execute(command)
+        self.connection.commit()
 
-def execute_sql(cursor, sql_command):
-    cursor.execute(sql_command)
-    print(cursor.fetchall())
+    def delete_from_db(self, command):
+        self.cursor.execute(command)
+        self.connection.commit()
 
-def close_connection(cursor):
-    cursor.close()
-    cursor.close()
+    def get_data_db(self, command):
+        self.cursor.execute(command)
+        return self.cursor.fetchall()
 
-cur = connect_database()
-execute_sql(cur, "SELECT * FROM data")
-close_connection(cur)
+    def close_connection(self):
+        self.cursor.close()
+        self.connection.close()  
+
+db = DataBase()
+# if not db.get_data_db('''SELECT * FROM history_data'''):
+#     print('hi')
+# db.add_to_db("UPDATE history_data SET id = id + 1 WHERE id != 5")
+z = db.get_data_db('''SELECT * FROM history_data WHERE id = 1''')[0]
+print(z[0]) 
+# db.add_to_db('''INSERT INTO history_data VALUES (1, "video", "file.mp4", "c:wwewenmnmnewk", "14:13/19.08")''')
+# db.delete_from_db('''DELETE FROM history_data WHERE id = 3''')
+db.close_connection()

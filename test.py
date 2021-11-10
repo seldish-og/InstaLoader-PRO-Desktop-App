@@ -8,13 +8,17 @@ from skimage import io
 import cv2
 from PIL import Image
 from io import BytesIO
+from datetime import datetime 
 
-url = 'https://scontent-arn2-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/p640x640/252491310_406986530867116_404895148171725041_n.jpg?_nc_ht=scontent-arn2-1.cdninstagram.com&_nc_cat=104&_nc_ohc=19PscMIOfV4AX9CEqHh&edm=AABBvjUBAAAA&ccb=7-4&oh=7fb20cd9a2a30362aacd4f51a32435c2&oe=618E0064&_nc_sid=83d603.jpg'
-r = requests.get(url)
-image = Image.open(BytesIO(r.content))
-new_image = image.resize((400, 500), Image.ANTIALIAS)
-new_image.save('image_400.jpg')
-
+x = str(datetime.now()).split()
+print(f"{x[1][:-10]}/{x[0]}")
+# url = 'https://scontent-arn2-1.cdninstagram.com/v/t50.16885-16/254332802_261172062631603_6019715270867718089_n.mp4?_nc_ht=scontent-arn2-1.cdninstagram.com&_nc_cat=107&_nc_ohc=s4ttind-S2sAX9ruxyX&edm=AABBvjUBAAAA&ccb=7-4&oe=618CD743&oh=e0e061a4c68e5e9135a445e30aa034de&_nc_sid=83d603'
+# r = requests.get(url)
+# with open(r"C:\Users\jegor\Downloads\filename.mp4", "wb") as filee:
+#     for chunk in r.iter_content(chunk_size = 1024*1024): 
+#             if chunk: 
+#                 filee.write(chunk) 
+ 
 
 '''doesn't work'''
 # width,height = '500', '600'
