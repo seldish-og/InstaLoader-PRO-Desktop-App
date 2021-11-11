@@ -11,32 +11,33 @@ from Views.design.design_app import Ui_MainWindow
 class MyApp(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle('INSTALOADER PRO')
         self.db = history.DataBase()
         self.setupUi(self)
+        self.setWindowTitle('INSTALOADER PRO')
 
         self.radio_video.toggled.connect(self.hide_input)
         self.radio_photo.toggled.connect(self.show_input)
 
-        card1 = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 1''')[0]
+        db_response = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 1''')
+        card1 = db_response[0]
         self.photo_1.setText(card1[1])
         self.file_1_tochange.setText(card1[2])
         self.path_1_tochange.setText(card1[3])
         self.date_1_tochange.setText(card1[4])
 
-        card2 = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 2''')[0]
+        card2 = db_response[1]
         self.photo_2.setText(card2[1])
         self.file_2_tochange.setText(card2[2])
         self.path_2_tochange.setText(card2[3])
         self.date_2_tochange.setText(card2[4])
 
-        card3 = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 3''')[0]
+        card3 = db_response[2]
         self.photo_3.setText(card3[1])
         self.file_3_tochange.setText(card3[2])
         self.path_3_tochange.setText(card3[3])
         self.date_3_tochange.setText(card3[4])
 
-        card4 = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 4''')[0]
+        card4 = [3]
         self.photo_4.setText(card4[1])
         self.file_4_tochange.setText(card4[2])
         self.path_4_tochange.setText(card4[3])
@@ -52,13 +53,6 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.px_1_label.hide()
         self.px_2_label.hide()
 
-        # self.width_input.hide()
-        # self.height_input.hide()
-        # self.width_label.hide()
-        # self.height_label.hide()
-        # self.px_1_label.hide()
-        # self.px_2_label.hide()
-
     def show_input(self):
         self.width_input.setText("400")
         self.width_input.setReadOnly(False)
@@ -66,13 +60,6 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.height_input.setReadOnly(False)
         self.px_1_label.show()
         self.px_2_label.show()
-
-        # self.width_input.show()
-        # self.height_input.show()
-        # self.width_label.show()
-        # self.height_label.show()
-        # self.px_1_label.show()
-        # self.px_2_label.show()
 
     def download(self):
         name = self.name_input.text()
