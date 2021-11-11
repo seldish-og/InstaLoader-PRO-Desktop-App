@@ -39,8 +39,8 @@ class TextParser:
 
 class Downloader:
     def __init__(self, video_name, video_path, width, height):
-        self.WIDTH = int(width)
-        self.HEIGHT = int(height)
+        self.WIDTH = width
+        self.HEIGHT = height
         self.COMPLETE_PATH = os.path.join(video_path, video_name)
 
     def download_image(self, link):
@@ -50,7 +50,7 @@ class Downloader:
             return "Invalid Url"
 
         image = Image.open(BytesIO(response.content))
-        resized_image = image.resize((self.WIDTH, self.HEIGHT), Image.ANTIALIAS)
+        resized_image = image.resize((int(self.WIDTH), int(self.HEIGHT)), Image.ANTIALIAS)
         resized_image.save(self.COMPLETE_PATH)
 
         print("successfully saved!")

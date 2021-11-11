@@ -397,12 +397,12 @@ class Ui_MainWindow(object):
         self.width_label.setStyleSheet("color: rgb(81, 81, 81);")
         self.width_label.setObjectName("width_label")
         self.width_input = QtWidgets.QLineEdit(self.centralwidget)
-        self.width_input.setGeometry(QtCore.QRect(510, 197, 41, 21))
+        self.width_input.setGeometry(QtCore.QRect(510, 197, 51, 21))
         self.width_input.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 13pt \"Times New Roman\";")
         self.width_input.setObjectName("width_input")
         self.height_input = QtWidgets.QLineEdit(self.centralwidget)
-        self.height_input.setGeometry(QtCore.QRect(685, 197, 41, 21))
+        self.height_input.setGeometry(QtCore.QRect(685, 197, 51, 21))
         self.height_input.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "font: 13pt \"Times New Roman\";")
         self.height_input.setObjectName("height_input")
@@ -415,12 +415,12 @@ class Ui_MainWindow(object):
         self.height_label.setStyleSheet("color: rgb(81, 81, 81);")
         self.height_label.setObjectName("height_label")
         self.px_1_label = QtWidgets.QLabel(self.centralwidget)
-        self.px_1_label.setGeometry(QtCore.QRect(553, 200, 16, 16))
+        self.px_1_label.setGeometry(QtCore.QRect(563, 200, 16, 16))
         self.px_1_label.setStyleSheet("color: rgb(81, 81, 81);\n"
 "font: 9pt \"Times New Roman\";")
         self.px_1_label.setObjectName("px_1_label")
         self.px_2_label = QtWidgets.QLabel(self.centralwidget)
-        self.px_2_label.setGeometry(QtCore.QRect(728, 200, 16, 16))
+        self.px_2_label.setGeometry(QtCore.QRect(738, 200, 16, 16))
         self.px_2_label.setStyleSheet("color: rgb(81, 81, 81);\n"
 "font: 9pt \"Times New Roman\";")
         self.px_2_label.setObjectName("px_2_label")
@@ -515,6 +515,6 @@ class Ui_MainWindow(object):
         self.height_label.setText(_translate("MainWindow", "height"))
         self.px_1_label.setText(_translate("MainWindow", "px"))
         self.px_2_label.setText(_translate("MainWindow", "px"))
-        self.name_input.setText(_translate("MainWindow", "file."))
+        self.name_input.setText(_translate("MainWindow", "-"))
         self.path_input.setText(_translate("MainWindow", "path"))
         self.link_input.setText(_translate("MainWindow", "link"))

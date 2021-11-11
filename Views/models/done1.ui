@@ -1005,7 +1005,7 @@ background-color: rgb(189, 53, 116);</string>
      <rect>
       <x>510</x>
       <y>197</y>
-      <width>41</width>
+      <width>51</width>
       <height>21</height>
      </rect>
     </property>
@@ -1022,7 +1022,7 @@ font: 13pt &quot;Times New Roman&quot;;</string>
      <rect>
       <x>685</x>
       <y>197</y>
-      <width>41</width>
+      <width>51</width>
       <height>21</height>
      </rect>
     </property>
@@ -1059,7 +1059,7 @@ font: 13pt &quot;Times New Roman&quot;;</string>
    <widget class="QLabel" name="px_1_label">
     <property name="geometry">
      <rect>
-      <x>553</x>
+      <x>563</x>
       <y>200</y>
       <width>16</width>
       <height>16</height>
@@ -1076,7 +1076,7 @@ font: 9pt &quot;Times New Roman&quot;;</string>
    <widget class="QLabel" name="px_2_label">
     <property name="geometry">
      <rect>
-      <x>728</x>
+      <x>738</x>
       <y>200</y>
       <width>16</width>
       <height>16</height>
@@ -1104,7 +1104,7 @@ font: 9pt &quot;Times New Roman&quot;;</string>
 font: 13pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
-     <string>file.mp4</string>
+     <string>-</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="path_input">
@@ -1121,7 +1121,7 @@ font: 13pt &quot;Times New Roman&quot;;</string>
 font: 13pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
-     <string>C:\Users\jegor\Downloads</string>
+     <string>path</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="link_input">
@@ -1138,7 +1138,7 @@ font: 13pt &quot;Times New Roman&quot;;</string>
 font: 13pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
-     <string>https://www.instagram.com/blunt_scooters/</string>
+     <string>link</string>
     </property>
    </widget>
    <widget class="QLabel" name="erorr_label">

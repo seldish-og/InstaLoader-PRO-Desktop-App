@@ -15,8 +15,8 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.db = history.DataBase()
         self.setupUi(self)
 
-        self.radio_video.toggled.connect(self.hide_widget)
-        self.radio_photo.toggled.connect(self.show_widget)
+        self.radio_video.toggled.connect(self.hide_input)
+        self.radio_photo.toggled.connect(self.show_input)
 
         card1 = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 1''')[0]
         self.photo_1.setText(card1[1])
@@ -44,21 +44,35 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
         self.pushButton.clicked.connect(self.download)
 
-    def hide_widget(self):
-        self.width_input.hide()
-        self.height_input.hide()
-        self.width_label.hide()
-        self.height_label.hide()
+    def hide_input(self):
+        self.width_input.setText("origin")
+        self.width_input.setReadOnly(True)
+        self.height_input.setText("origin")
+        self.height_input.setReadOnly(True)
         self.px_1_label.hide()
         self.px_2_label.hide()
 
-    def show_widget(self):
-        self.width_input.show()
-        self.height_input.show()
-        self.width_label.show()
-        self.height_label.show()
+        # self.width_input.hide()
+        # self.height_input.hide()
+        # self.width_label.hide()
+        # self.height_label.hide()
+        # self.px_1_label.hide()
+        # self.px_2_label.hide()
+
+    def show_input(self):
+        self.width_input.setText("400")
+        self.width_input.setReadOnly(False)
+        self.height_input.setText("500")
+        self.height_input.setReadOnly(False)
         self.px_1_label.show()
         self.px_2_label.show()
+
+        # self.width_input.show()
+        # self.height_input.show()
+        # self.width_label.show()
+        # self.height_label.show()
+        # self.px_1_label.show()
+        # self.px_2_label.show()
 
     def download(self):
         name = self.name_input.text()
