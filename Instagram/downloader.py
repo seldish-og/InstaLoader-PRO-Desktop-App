@@ -64,7 +64,7 @@ class Downloader:
             return "Invalid Url"
 
         with open(self.COMPLETE_PATH, "wb") as video_file:
-            for chunk in video.iter_content(chunk_size=self.WIDTH * self.HEIGHT):
+            for chunk in video.iter_content(chunk_size=900 * 900):
                 if chunk:
                     video_file.write(chunk)
 
