@@ -4,8 +4,8 @@ from datetime import datetime
 from PyQt5.QtWidgets import QApplication, QMainWindow
 
 from database import history
-from instagram import main
-from views.design.design_app import Ui_MainWindow
+from Instagram import main
+from Views.design.design_app import Ui_MainWindow
 
 
 class MyApp(QMainWindow, Ui_MainWindow):
