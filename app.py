@@ -3,7 +3,7 @@ import sys
 from datetime import datetime 
 from database import history
 from instagram import main
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow
 from views.design.design_app import Ui_MainWindow
 
 
@@ -13,6 +13,9 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.setWindowTitle('INSTALOADER PRO')
         self.db = history.DataBase()
         self.setupUi(self)
+
+        self.radio_video.toggled.connect(self.hide_widget)
+        self.radio_photo.toggled.connect(self.show_widget)
 
         card1 = self.db.get_data_db('''SELECT * FROM history_data WHERE id = 1''')[0]
         self.photo_1.setText(card1[1])
@@ -39,6 +42,23 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.date_4_tochange.setText(card4[4])
 
         self.pushButton.clicked.connect(self.download)
+
+    def hide_widget(self):
+        self.width_input.hide()
+        self.height_input.hide()
+        self.width_label.hide()
+        self.height_label.hide()
+        self.px_1_label.hide()
+        self.px_2_label.hide()
+
+    def show_widget(self):
+        self.width_input.show()
+        self.height_input.show()
+        self.width_label.show()
+        self.height_label.show()
+        self.px_1_label.show()
+        self.px_2_label.show()
+        
 
     def download(self):
         name = self.name_input.text()
@@ -83,8 +103,11 @@ def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    form = MyApp()
-    form.show()
-    sys.excepthook = except_hook
-    sys.exit(app.exec())
+    try:
+        app = QApplication(sys.argv)
+        form = MyApp()
+        form.show()
+        sys.excepthook = except_hook
+        sys.exit(app.exec())
+    except Exception as eee:
+        print(eee)
