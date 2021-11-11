@@ -10,6 +10,7 @@ from views.design.design_app import Ui_MainWindow
 class MyApp(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
+        self.setWindowTitle('INSTALOADER PRO')
         self.db = history.DataBase()
         self.setupUi(self)
 
@@ -54,22 +55,28 @@ class MyApp(QMainWindow, Ui_MainWindow):
         height = self.height_input.text()
 
         date = str(datetime.now()).split()
-        formated_date = f"{date[1][:-10]}/{date[0]}" 
-        self.db.add_to_db(
-            "UPDATE history_data SET id = id + 1 WHERE id != 5"
-            )
-        self.db.add_to_db(
-            '''INSERT INTO history_data 
-            VALUES ({}, {}, {}, {}, {})'''.format(1, mode, name, path, formated_date)
-            )
-        self.db.delete_from_db(
-            '''DELETE FROM history_data WHERE id = 5'''
-        )
-        
+        formated_date = f"{date[1][:-10]}/{date[0][5:]}" 
         try:
             main.main(name, path, mode, link, width, height)
+            self.label.setText("Saved")
+            self.erorr_label.setText("")
+
+            self.db.update_db(
+                "UPDATE history_data SET id = id + 1 WHERE id != 5"
+                )
+            self.db.add_to_db(
+                '''INSERT INTO history_data(id, mode, name, path, date) 
+                VALUES (?,?,?,?,?);''', (1, mode, name, path, formated_date)
+                )
+            self.db.delete_from_db(
+                '''DELETE FROM history_data WHERE id = 5'''
+            )
+        
+        
         except Exception as e:
             print(e)
+            self.erorr_label.setText("ERROR, CHECK THE FORM")
+            self.label.setText("")
 
 
 def except_hook(cls, exception, traceback):
