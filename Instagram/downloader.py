@@ -1,11 +1,9 @@
-import lxml
-import cchardet
-import re
 import os
+import re
+from io import BytesIO
+
 import requests
 import requests.exceptions
-from bs4 import BeautifulSoup
-from io import BytesIO
 from PIL import Image
 
 
@@ -54,7 +52,7 @@ class Downloader:
         image = Image.open(BytesIO(response.content))
         resized_image = image.resize((self.WIDTH, self.HEIGHT), Image.ANTIALIAS)
         resized_image.save(self.COMPLETE_PATH)
-        
+
         print("successfully saved!")
 
     def download_video(self, link):

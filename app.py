@@ -1,9 +1,10 @@
 import sys
+from datetime import datetime
 
-from datetime import datetime 
+from PyQt5.QtWidgets import QApplication, QMainWindow
+
 from database import history
 from instagram import main
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow
 from views.design.design_app import Ui_MainWindow
 
 
@@ -58,7 +59,6 @@ class MyApp(QMainWindow, Ui_MainWindow):
         self.height_label.show()
         self.px_1_label.show()
         self.px_2_label.show()
-        
 
     def download(self):
         name = self.name_input.text()
@@ -68,14 +68,13 @@ class MyApp(QMainWindow, Ui_MainWindow):
             mode = "image"
         if self.radio_video.isChecked():
             mode = "video"
-         
-        
+
         link = self.link_input.text()
         width = self.width_input.text()
         height = self.height_input.text()
 
         date = str(datetime.now()).split()
-        formated_date = f"{date[1][:-10]}/{date[0][5:]}" 
+        formated_date = f"{date[1][:-10]}/{date[0][5:]}"
         try:
             main.main(name, path, mode, link, width, height)
             self.label.setText("Saved")
@@ -83,16 +82,15 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
             self.db.update_db(
                 "UPDATE history_data SET id = id + 1 WHERE id != 5"
-                )
+            )
             self.db.add_to_db(
                 '''INSERT INTO history_data(id, mode, name, path, date) 
                 VALUES (?,?,?,?,?);''', (1, mode, name, path, formated_date)
-                )
+            )
             self.db.delete_from_db(
                 '''DELETE FROM history_data WHERE id = 5'''
             )
-        
-        
+            
         except Exception as e:
             print(e)
             self.erorr_label.setText("ERROR, CHECK THE FORM")
@@ -101,6 +99,7 @@ class MyApp(QMainWindow, Ui_MainWindow):
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
+
 
 if __name__ == '__main__':
     try:

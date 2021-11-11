@@ -24,5 +24,4 @@ class DataBase:
 
     def close_connection(self):
         self.cursor.close()
-        self.connection.close()  
-
+        self.connection.close()
